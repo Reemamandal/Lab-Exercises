@@ -1,84 +1,117 @@
-package day15_18th_june;
+package day17_20th_june;
 
-//Abstract class Shape
-abstract class Shape {
- // Abstract method to calculate area (to be implemented by subclasses)
- public abstract double calculateArea();
- 
- // Concrete method to display shape information
- public void display() {
-     System.out.println("Displaying shape");
- }
+interface Vehicle {
+    void start();
+    void stop();
 }
 
-//Concrete subclass Circle extending Shape
-class Circle extends Shape {
- private double radius;
- 
- // Constructor
- public Circle(double radius) {
-     this.radius = radius;
- }
- 
- // Implementing abstract method to calculate area for Circle
- @Override
- public double calculateArea() {
-     return Math.PI * radius * radius;
- }
- 
- // Getter method for radius (optional)
- public double getRadius() {
-     return radius;
- }
+interface LandVehicle extends Vehicle {
+    void drive();
 }
 
-//Concrete subclass Rectangle extending Shape
-class Rectangle extends Shape {
- private double length;
- private double width;
- 
- // Constructor
- public Rectangle(double length, double width) {
-     this.length = length;
-     this.width = width;
- }
- 
- // Implementing abstract method to calculate area for Rectangle
- @Override
- public double calculateArea() {
-     return length * width;
- }
- 
- // Getter methods for length and width (optional)
- public double getLength() {
-     return length;
- }
- 
- public double getWidth() {
-     return width;
- }
+interface SeaVehicle extends Vehicle {
+	void floating();
+}
+
+class Car implements LandVehicle {
+    @Override
+    public void start() {
+        System.out.println("Car is starting.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Car is stopping.");
+    }
+
+    @Override
+    public void drive() {
+        System.out.println("Car is driving.");
+    }
+}
+
+class Bicycle implements LandVehicle {
+    @Override
+    public void start() {
+        System.out.println("Bicycle is starting.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Bicycle is stopping.");
+    }
+
+    @Override
+    public void drive() {
+        System.out.println("Bicycle is driving.");
+    }
+}
+
+class Ship implements SeaVehicle {
+    @Override
+    public void start() {
+        System.out.println("Ship is starting.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Ship is stopping.");
+    }
+
+    @Override
+    public void floating() {
+        System.out.println("Ship is floating.");
+    }
+}
+
+class Submarine implements SeaVehicle {
+    @Override
+    public void start() {
+        System.out.println("Submarine is starting.");
+    }
+
+    @Override
+    public void stop() {
+        System.out.println("Submarine is stopping.");
+    }
+
+    @Override
+    public void floating() {
+        System.out.println("Submarine is floating.");
+    }
 }
 
 public class Main1 {
-	 public static void main(String[] args) {
-	        // Create instances of Circle and Rectangle
-	        Circle circle = new Circle(5.0);
-	        Rectangle rectangle = new Rectangle(4.0, 6.0);
-	        
-	        // Demonstrate polymorphic behavior
-	        Shape shape1 = circle; // Upcasting
-	        Shape shape2 = rectangle; // Upcasting
-	        
-	        // Calling methods and displaying areas
-	        shape1.display();
-	        System.out.println("Area of circle: " + shape1.calculateArea());
-	        System.out.println("Radius of circle: " + ((Circle) shape1).getRadius()); // Downcasting
-	        System.out.println();
-	        
-	        shape2.display();
-	        System.out.println("Area of rectangle: " + shape2.calculateArea());
-	        System.out.println("Length of rectangle: " + ((Rectangle) shape2).getLength()); // Downcasting
-	        System.out.println("Width of rectangle: " + ((Rectangle) shape2).getWidth()); // Downcasting
-	    }
+	public static void main(String[] args) {
+        // Create instances of each class
+        LandVehicle car = new Car();
+        LandVehicle bicycle = new Bicycle();
+        SeaVehicle ship = new Ship();
+        SeaVehicle submarine = new Submarine();
+
+        // Test Car methods
+        System.out.println("Testing Car:");
+        car.start();
+        car.drive();
+        car.stop();
+
+        // Test Bicycle methods
+        System.out.println("\nTesting Bicycle:");
+        bicycle.start();
+        bicycle.drive();
+        bicycle.stop();
+
+        // Test Ship methods
+        System.out.println("\nTesting Ship:");
+        ship.start();
+        ship.floating();
+        ship.stop();
+
+        // Test Submarine methods
+        System.out.println("\nTesting Submarine:");
+        submarine.start();
+        submarine.floating();
+        submarine.stop();
+    }
 
 }
